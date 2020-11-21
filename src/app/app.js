@@ -1,0 +1,84 @@
+import angular from "angular";
+import "angular-route";
+import "angular-material";
+import "angular-messages";
+
+import LoginCtrl from "./route/login/index.controller";
+import HomeCtrl from "./route/home/index.controller";
+import RegisterCtrl from "./route/register/index.controller";
+
+import { UserFactory } from "./factory/user";
+
+import "../style/app.css";
+
+let app = () => {
+  return {
+    template: require("./app.html"),
+    controller: "AppCtrl",
+    controllerAs: "app",
+  };
+};
+
+class AppCtrl {
+  constructor() {
+    this.url = "https://github.com/preboot/angular-webpack";
+  }
+}
+
+const MODULE_NAME = "app";
+
+const mainModule = angular.module(MODULE_NAME, [
+  "ngRoute",
+  "ngMaterial",
+  "ngMessages",
+]);
+
+mainModule.directive("app", app);
+
+mainModule.factory("UserFactory", UserFactory);
+
+mainModule
+  .controller("AppCtrl", AppCtrl)
+  .controller("HomeCtrl", HomeCtrl)
+  .controller("LoginCtrl", LoginCtrl)
+  .controller("RegisterCtrl", RegisterCtrl);
+
+mainModule
+  .config(function ($routeProvider) {
+    $routeProvider
+      .when("/", {
+        template: require("./route/home/index.html"),
+        controller: "HomeCtrl",
+      })
+      .when("/login", {
+        template: require("./route/login/index.html"),
+        controller: "LoginCtrl",
+      })
+      .when("/register", {
+        template: require("./route/register/index.html"),
+        controller: "RegisterCtrl",
+      });
+  })
+  .config([
+    "$mdGestureProvider",
+    "$mdThemingProvider",
+    function ($mdGestureProvider, $mdThemingProvider) {
+      $mdGestureProvider.skipClickHijack();
+      $mdThemingProvider
+        .theme("default")
+        .primaryPalette("purple")
+        .accentPalette("green");
+    },
+  ])
+  .config(function ($mdThemingProvider) {
+    // Configure a dark theme with primary foreground yellow
+
+    $mdThemingProvider
+      .theme("docs-dark", "default")
+      .primaryPalette("yellow")
+      .dark();
+  });
+
+window.app = mainModule;
+
+export default MODULE_NAME;
