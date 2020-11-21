@@ -20,10 +20,24 @@ let app = () => {
   };
 };
 
-class AppCtrl {
-  constructor() {
-    this.url = "https://github.com/preboot/angular-webpack";
-  }
+function AppCtrl($scope, $location, UserFactory) {
+  $scope.$on("$routeChangeStart", function ($event, next, current) {
+    const isLoggeedIn = UserFactory.getIsLoggedIn();
+
+    if (!isLoggeedIn) {
+      $location.path("/login");
+    }
+  });
+
+  $scope.checkLogin = function () {
+    const user = localStorage.getItem("user");
+    if (user) {
+      const userDecrypted = window.atob(user);
+      const userParsed = JSON.parse(userDecrypted);
+
+      UserFactory.login(userParsed.un, userParsed.password);
+    }
+  };
 }
 
 const MODULE_NAME = "app";
@@ -61,6 +75,10 @@ mainModule
         controller: "PostRequestCtrl",
       })
       .when("/register", {
+        template: require("./route/register/index.html"),
+        controller: "RegisterCtrl",
+      })
+      .when("/post/:id", {
         template: require("./route/register/index.html"),
         controller: "RegisterCtrl",
       });

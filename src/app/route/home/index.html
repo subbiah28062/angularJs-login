@@ -1,15 +1,18 @@
 <div>
-<md-button
-  ng-if="isAdmin"
-  ng-init="checkIsAdmin()"
-  class="md-raised md-primary"
-  ng-click="register()"
->
-  Add New User
-</md-button>
+  <md-button
+    ng-if="isAdmin"
+    ng-init="checkIsAdmin()"
+    class="md-raised md-primary"
+    ng-click="register()"
+  >
+    Add New User
+  </md-button>
 
-<md-button class="md" ng-click="create()">
-  Create Post request
-</md-button>
+  <md-button class="md" ng-click="create()"> Create Post request </md-button>
+
+  <ul>
+    <li ng-repeat="post in posts">
+      <div ng-click="routeToPost(post.id)">{{post.title}}</div>
+    </li>
+  </ul>
 </div>
-
