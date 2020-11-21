@@ -8,4 +8,10 @@ export default function ($scope, $location, UserFactory) {
   $scope.register = function () {
     $location.path("/register");
   };
+
+  $scope.create = function () {
+    $location.path("/postRequests");
+  };
+
+
 }

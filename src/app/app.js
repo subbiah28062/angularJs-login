@@ -6,6 +6,7 @@ import "angular-messages";
 import LoginCtrl from "./route/login/index.controller";
 import HomeCtrl from "./route/home/index.controller";
 import RegisterCtrl from "./route/register/index.controller";
+import PostRequestCtrl from "./route/postRequests/index.controller";
 
 import { UserFactory } from "./factory/user";
 
@@ -41,6 +42,7 @@ mainModule
   .controller("AppCtrl", AppCtrl)
   .controller("HomeCtrl", HomeCtrl)
   .controller("LoginCtrl", LoginCtrl)
+  .controller("PostRequestCtrl", PostRequestCtrl)
   .controller("RegisterCtrl", RegisterCtrl);
 
 mainModule
@@ -53,6 +55,10 @@ mainModule
       .when("/login", {
         template: require("./route/login/index.html"),
         controller: "LoginCtrl",
+      })
+      .when("/postRequests", {
+        template: require("./route/postRequests/index.html"),
+        controller: "PostRequestCtrl",
       })
       .when("/register", {
         template: require("./route/register/index.html"),
