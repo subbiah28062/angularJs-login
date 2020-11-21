@@ -1,0 +1,36 @@
+<form class="example-form">
+    <title> Login Creation</title>
+    <form  name="myForm" >
+    <mat-form-field class="class-username">
+    <mat-label>Username</mat-label><br>
+    <input matInput placeholder="Username" name="un" ng-model="un" required><br><br>
+    <span ng-show="myForm.un.$touched && myForm.un.$invalid">The Username is required.</span>
+  </mat-form-field>
+
+    <mat-form-field class="class-password"><br>
+    <mat-label>Password</mat-label><br>
+    <input type="password" matInput placeholder="Password" name="password" ng-model="password" required><br><br>
+    <span ng-show="myForm.password.$touched && myForm.password.$invalid">Password is required.</span><br>
+  </mat-form-field>
+      <mat-form-field class="class-role">
+
+    <mat-label>user/admin</mat-label><br>
+    <input type="text" matInput placeholder="user/admin" ng-model="role" required><br>
+  </mat-form-field>
+        <button type="button" ng-click="newSubmit()" ng-disabled="myForm.password.$dirty && myForm.password.$invalid ||myForm.un.$dirty && myForm.un.$invalid || myForm.un.$pristine || myForm.password.$pristine" required> Submit </button>
+
+</form>
+<div>Current User</div>
+<div>{{cu}}</div>
+
+        <button type = "button" ng-click="view()"> View Users</button><br><br><br><br>
+        <ul>
+          <li ng-repeat= "x in get">{{'Username '+ x.un + ', Password ' + x.password + ', Role ' + x.role}} </li>
+        </ul>
+
+        <ul>
+          <li ng-repeat= "y in currentUser">{{'Post Title' + y.posttitle}}</li>
+        </ul>
+
+
+
