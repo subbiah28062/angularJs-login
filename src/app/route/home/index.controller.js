@@ -1,5 +1,6 @@
 export default function ($scope, $location, UserFactory) {
   $scope.isAdmin = true;
+  $scope.posts = UserFactory.getUserPosts();
 
   $scope.checkIsAdmin = function () {
     $scope.isAdmin = UserFactory.getIsAdmin();
@@ -13,5 +14,7 @@ export default function ($scope, $location, UserFactory) {
     $location.path("/postRequests");
   };
 
-
+  $scope.routeToPost = function (id) {
+    $location.path(`/post/${id}`);
+  };
 }
